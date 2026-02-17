@@ -48,54 +48,5 @@ function runLocalAnalysis(ingredientText: string): AnalysisResult {
   };
 }
 
-// API endpoint documentation for the planned backend
-export const API_ENDPOINTS = [
-  {
-    method: 'POST' as const,
-    path: '/api/analyze',
-    description: 'Full ingredient analysis — allergens, category, score',
-    requestBody: '{ "ingredientText": "string" }',
-    responseBody: 'AnalysisResult',
-    status: 'available' as const,
-  },
-  {
-    method: 'POST' as const,
-    path: '/api/detect-allergens',
-    description: 'Detect allergens from ingredient text',
-    requestBody: '{ "ingredientText": "string" }',
-    responseBody: '{ "allergens": Allergen[] }',
-    status: 'available' as const,
-  },
-  {
-    method: 'POST' as const,
-    path: '/api/predict-category',
-    description: 'Predict food category using ML model (TF-IDF + LogReg)',
-    requestBody: '{ "ingredientText": "string" }',
-    responseBody: '{ "category": string, "confidence": number }',
-    status: 'planned' as const,
-  },
-  {
-    method: 'POST' as const,
-    path: '/api/calculate-score',
-    description: 'Calculate clean label and health risk scores',
-    requestBody: '{ "ingredientText": "string" }',
-    responseBody: '{ "cleanLabelScore": number, "healthRiskScore": number }',
-    status: 'available' as const,
-  },
-  {
-    method: 'POST' as const,
-    path: '/api/get-similar-products',
-    description: 'Find similar products using ingredient embeddings',
-    requestBody: '{ "ingredientText": "string", "topK": number }',
-    responseBody: '{ "products": SimilarProduct[] }',
-    status: 'planned' as const,
-  },
-  {
-    method: 'GET' as const,
-    path: '/api/additives',
-    description: 'Get full additive knowledge base',
-    requestBody: undefined,
-    responseBody: '{ "additives": Additive[] }',
-    status: 'planned' as const,
-  },
-];
+// API endpoint documentation moved to docs/API_REFERENCE.md
+// See docs/ folder for complete backend integration guide
