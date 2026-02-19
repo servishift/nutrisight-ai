@@ -12,6 +12,14 @@ export interface Allergen {
   severity: 'high' | 'medium' | 'low';
 }
 
+export interface Additive {
+  name: string;
+  type: 'preservative' | 'color' | 'flavor' | 'sweetener' | 'emulsifier' | 'stabilizer' | 'antioxidant';
+  riskLevel: 'high' | 'medium' | 'low';
+  description: string;
+  matchedKeywords: string[];
+}
+
 export interface IngredientStat {
   name: string;
   count: number;
@@ -23,23 +31,30 @@ export interface CategoryPrediction {
   confidence: number;
 }
 
+export interface HealthRiskFactor {
+  ingredient: string;
+  impact: 'positive' | 'negative' | 'caution' | 'neutral';
+  points: number;
+  reason: string;
+}
+
+export interface HealthRiskBreakdown {
+  score: number;
+  riskLevel: 'low' | 'moderate' | 'high' | 'very-high';
+  factors: HealthRiskFactor[];
+  additiveCount: number;
+}
+
 export interface AnalysisResult {
   allergens: Allergen[];
+  additives: Additive[];
   category: CategoryPrediction | null;
   ingredientCount: number;
   ingredients: string[];
   topIngredients: IngredientStat[];
   cleanLabelScore: number | null;
+  healthRisk: HealthRiskBreakdown | null;
   analyzedAt: string;
-}
-
-export interface ApiEndpoint {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  path: string;
-  description: string;
-  requestBody?: string;
-  responseBody?: string;
-  status: 'available' | 'planned';
 }
 
 export type AnalysisStatus = 'idle' | 'analyzing' | 'complete' | 'error';

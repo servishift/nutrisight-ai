@@ -6,6 +6,8 @@ import AllergenResults from '@/components/analyzer/AllergenResults';
 import ScoreCard from '@/components/analyzer/ScoreCard';
 import IngredientStats from '@/components/analyzer/IngredientStats';
 import CategoryResult from '@/components/analyzer/CategoryResult';
+import AdditiveResults from '@/components/analyzer/AdditiveResults';
+import HealthRiskCard from '@/components/analyzer/HealthRiskCard';
 import { analyzeIngredients } from '@/services/api';
 import type { AnalysisResult, AnalysisStatus } from '@/types/ingredient';
 
@@ -35,7 +37,7 @@ export default function Analyzer() {
             Ingredient Analyzer
           </h1>
           <p className="text-muted-foreground">
-            Paste an ingredient list to get instant allergen detection and health scoring
+            Paste an ingredient list to get instant allergen detection, additive analysis, and health scoring
           </p>
         </div>
 
@@ -69,10 +71,14 @@ export default function Analyzer() {
               >
                 <div className="grid gap-4 sm:grid-cols-2">
                   <ScoreCard score={result.cleanLabelScore} ingredientCount={result.ingredientCount} />
-                  <CategoryResult category={result.category} />
+                  {result.healthRisk && <HealthRiskCard healthRisk={result.healthRisk} />}
                 </div>
                 <AllergenResults allergens={result.allergens} />
-                <IngredientStats stats={result.topIngredients} />
+                <AdditiveResults additives={result.additives} />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <IngredientStats stats={result.topIngredients} />
+                  <CategoryResult category={result.category} />
+                </div>
               </motion.div>
             )}
           </div>

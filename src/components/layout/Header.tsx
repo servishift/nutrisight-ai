@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Leaf, Menu, X, User, LogOut } from 'lucide-react';
+import { Leaf, Menu, X, User, LogOut, LayoutDashboard, Upload, Beaker, Crown } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -12,10 +12,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-const NAV_ITEMS = [
+const PUBLIC_NAV = [
   { label: 'Home', path: '/' },
   { label: 'Analyzer', path: '/analyzer' },
+  { label: 'Pricing', path: '/pricing' },
   { label: 'Docs', path: '/docs' },
+];
+
+const AUTH_NAV = [
+  { label: 'Dashboard', path: '/dashboard' },
+  { label: 'Analyzer', path: '/analyzer' },
+  { label: 'Batch', path: '/batch' },
+  { label: 'Additives', path: '/additives' },
+  { label: 'Pricing', path: '/pricing' },
 ];
 
 export default function Header() {
@@ -23,10 +32,12 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
 
+  const navItems = isAuthenticated ? AUTH_NAV : PUBLIC_NAV;
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
             <Leaf className="h-5 w-5 text-primary-foreground" />
           </div>
@@ -37,7 +48,7 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <Link
@@ -70,15 +81,36 @@ export default function Header() {
                   </div>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuContent align="end" className="w-52">
                 <div className="px-2 py-1.5">
                   <p className="text-sm font-medium text-foreground">{user?.displayName || 'User'}</p>
                   <p className="text-xs text-muted-foreground">{user?.email}</p>
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
+                  <Link to="/dashboard" className="cursor-pointer">
+                    <LayoutDashboard className="mr-2 h-4 w-4" /> Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/profile" className="cursor-pointer">
                     <User className="mr-2 h-4 w-4" /> Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/batch" className="cursor-pointer">
+                    <Upload className="mr-2 h-4 w-4" /> Batch Upload
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/additives" className="cursor-pointer">
+                    <Beaker className="mr-2 h-4 w-4" /> Additives
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/pricing" className="cursor-pointer">
+                    <Crown className="mr-2 h-4 w-4" /> Plans
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -116,7 +148,7 @@ export default function Header() {
           animate={{ opacity: 1, y: 0 }}
           className="border-t border-border bg-background px-4 pb-4 md:hidden"
         >
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}

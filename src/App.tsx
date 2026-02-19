@@ -14,6 +14,10 @@ import VerifyOTPPage from "./pages/auth/VerifyOTPPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import ProfilePage from "./pages/ProfilePage";
+import DashboardPage from "./pages/DashboardPage";
+import BatchUploadPage from "./pages/BatchUploadPage";
+import AdditiveDatabasePage from "./pages/AdditiveDatabasePage";
+import PricingPage from "./pages/PricingPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -30,17 +34,25 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/analyzer" element={<Analyzer />} />
             <Route path="/docs" element={<Documentation />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/verify-otp" element={<VerifyOTPPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-            {/* Protected routes */}
+            {/* Auth-gated routes (Phase 2+) */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute><DashboardPage /></ProtectedRoute>
+            } />
+            <Route path="/batch" element={
+              <ProtectedRoute><BatchUploadPage /></ProtectedRoute>
+            } />
+            <Route path="/additives" element={
+              <ProtectedRoute><AdditiveDatabasePage /></ProtectedRoute>
+            } />
             <Route path="/profile" element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
+              <ProtectedRoute><ProfilePage /></ProtectedRoute>
             } />
 
             <Route path="*" element={<NotFound />} />
