@@ -20,6 +20,18 @@ import AdditiveDatabasePage from "./pages/AdditiveDatabasePage";
 import PricingPage from "./pages/PricingPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
+// Admin
+import { AdminAuthProvider } from "./admin/contexts/AdminAuthContext";
+import AdminProtectedRoute from "./admin/components/AdminProtectedRoute";
+import AdminLayout from "./admin/layouts/AdminLayout";
+import AdminLoginPage from "./admin/pages/AdminLoginPage";
+import AdminDashboard from "./admin/pages/AdminDashboard";
+import AdminUsersPage from "./admin/pages/AdminUsersPage";
+import AdminAdditivesPage from "./admin/pages/AdminAdditivesPage";
+import AdminAnalyticsPage from "./admin/pages/AdminAnalyticsPage";
+import AdminAuditLogsPage from "./admin/pages/AdminAuditLogsPage";
+import AdminSettingsPage from "./admin/pages/AdminSettingsPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -41,19 +53,30 @@ const App = () => (
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-            {/* Auth-gated routes (Phase 2+) */}
-            <Route path="/dashboard" element={
-              <ProtectedRoute><DashboardPage /></ProtectedRoute>
+            {/* Auth-gated routes */}
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/batch" element={<ProtectedRoute><BatchUploadPage /></ProtectedRoute>} />
+            <Route path="/additives" element={<ProtectedRoute><AdditiveDatabasePage /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+
+            {/* ─── Admin Portal ─── */}
+            <Route path="/admin/login" element={
+              <AdminAuthProvider><AdminLoginPage /></AdminAuthProvider>
             } />
-            <Route path="/batch" element={
-              <ProtectedRoute><BatchUploadPage /></ProtectedRoute>
-            } />
-            <Route path="/additives" element={
-              <ProtectedRoute><AdditiveDatabasePage /></ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <ProtectedRoute><ProfilePage /></ProtectedRoute>
-            } />
+            <Route path="/admin" element={
+              <AdminAuthProvider>
+                <AdminProtectedRoute>
+                  <AdminLayout />
+                </AdminProtectedRoute>
+              </AdminAuthProvider>
+            }>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<AdminUsersPage />} />
+              <Route path="additives" element={<AdminAdditivesPage />} />
+              <Route path="analytics" element={<AdminAnalyticsPage />} />
+              <Route path="audit-logs" element={<AdminAuditLogsPage />} />
+              <Route path="settings" element={<AdminSettingsPage />} />
+            </Route>
 
             <Route path="*" element={<NotFound />} />
           </Routes>
