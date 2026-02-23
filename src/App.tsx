@@ -18,6 +18,10 @@ import DashboardPage from "./pages/DashboardPage";
 import BatchUploadPage from "./pages/BatchUploadPage";
 import AdditiveDatabasePage from "./pages/AdditiveDatabasePage";
 import PricingPage from "./pages/PricingPage";
+import SimilaritySearchPage from "./pages/SimilaritySearchPage";
+import BrandPredictionPage from "./pages/BrandPredictionPage";
+import ReformulationPage from "./pages/ReformulationPage";
+import EmbeddingsPage from "./pages/EmbeddingsPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 // Admin
@@ -57,6 +61,10 @@ const App = () => (
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/batch" element={<ProtectedRoute><BatchUploadPage /></ProtectedRoute>} />
             <Route path="/additives" element={<ProtectedRoute><AdditiveDatabasePage /></ProtectedRoute>} />
+            <Route path="/similarity" element={<ProtectedRoute><SimilaritySearchPage /></ProtectedRoute>} />
+            <Route path="/brand-prediction" element={<ProtectedRoute><BrandPredictionPage /></ProtectedRoute>} />
+            <Route path="/reformulation" element={<ProtectedRoute><ReformulationPage /></ProtectedRoute>} />
+            <Route path="/embeddings" element={<ProtectedRoute><EmbeddingsPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
             {/* ─── Admin Portal ─── */}

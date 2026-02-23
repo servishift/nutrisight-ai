@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Leaf, Menu, X, User, LogOut, LayoutDashboard, Upload, Beaker, Crown } from 'lucide-react';
+import { Leaf, Menu, X, User, LogOut, LayoutDashboard, Upload, Beaker, Crown, Sparkles, Brain, ArrowRightLeft, Atom } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -22,9 +22,9 @@ const PUBLIC_NAV = [
 const AUTH_NAV = [
   { label: 'Dashboard', path: '/dashboard' },
   { label: 'Analyzer', path: '/analyzer' },
-  { label: 'Batch', path: '/batch' },
-  { label: 'Additives', path: '/additives' },
-  { label: 'Pricing', path: '/pricing' },
+  { label: 'Similarity', path: '/similarity' },
+  { label: 'Brand AI', path: '/brand-prediction' },
+  { label: 'Reformulation', path: '/reformulation' },
 ];
 
 export default function Header() {
@@ -105,6 +105,27 @@ export default function Header() {
                 <DropdownMenuItem asChild>
                   <Link to="/additives" className="cursor-pointer">
                     <Beaker className="mr-2 h-4 w-4" /> Additives
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/similarity" className="cursor-pointer">
+                    <Sparkles className="mr-2 h-4 w-4" /> Similarity Search
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/brand-prediction" className="cursor-pointer">
+                    <Brain className="mr-2 h-4 w-4" /> Brand Prediction
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/reformulation" className="cursor-pointer">
+                    <ArrowRightLeft className="mr-2 h-4 w-4" /> Reformulation
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/embeddings" className="cursor-pointer">
+                    <Atom className="mr-2 h-4 w-4" /> Embeddings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
