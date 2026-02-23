@@ -22,6 +22,10 @@ import SimilaritySearchPage from "./pages/SimilaritySearchPage";
 import BrandPredictionPage from "./pages/BrandPredictionPage";
 import ReformulationPage from "./pages/ReformulationPage";
 import EmbeddingsPage from "./pages/EmbeddingsPage";
+import ApiKeysPage from "./pages/ApiKeysPage";
+import ApiPlaygroundPage from "./pages/ApiPlaygroundPage";
+import ApiUsagePage from "./pages/ApiUsagePage";
+import WebhooksPage from "./pages/WebhooksPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 // Admin
@@ -65,6 +69,10 @@ const App = () => (
             <Route path="/brand-prediction" element={<ProtectedRoute><BrandPredictionPage /></ProtectedRoute>} />
             <Route path="/reformulation" element={<ProtectedRoute><ReformulationPage /></ProtectedRoute>} />
             <Route path="/embeddings" element={<ProtectedRoute><EmbeddingsPage /></ProtectedRoute>} />
+            <Route path="/api-keys" element={<ProtectedRoute><ApiKeysPage /></ProtectedRoute>} />
+            <Route path="/api-playground" element={<ProtectedRoute><ApiPlaygroundPage /></ProtectedRoute>} />
+            <Route path="/api-usage" element={<ProtectedRoute><ApiUsagePage /></ProtectedRoute>} />
+            <Route path="/webhooks" element={<ProtectedRoute><WebhooksPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
             {/* ─── Admin Portal ─── */}

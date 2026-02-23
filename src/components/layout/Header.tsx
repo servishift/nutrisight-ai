@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Leaf, Menu, X, User, LogOut, LayoutDashboard, Upload, Beaker, Crown, Sparkles, Brain, ArrowRightLeft, Atom } from 'lucide-react';
+import { Leaf, Menu, X, User, LogOut, LayoutDashboard, Upload, Beaker, Crown, Sparkles, Brain, ArrowRightLeft, Atom, Key, Terminal, Activity, Webhook } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -126,6 +126,27 @@ export default function Header() {
                 <DropdownMenuItem asChild>
                   <Link to="/embeddings" className="cursor-pointer">
                     <Atom className="mr-2 h-4 w-4" /> Embeddings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/api-keys" className="cursor-pointer">
+                    <Key className="mr-2 h-4 w-4" /> API Keys
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/api-playground" className="cursor-pointer">
+                    <Terminal className="mr-2 h-4 w-4" /> Playground
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/api-usage" className="cursor-pointer">
+                    <Activity className="mr-2 h-4 w-4" /> Usage
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/webhooks" className="cursor-pointer">
+                    <Webhook className="mr-2 h-4 w-4" /> Webhooks
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
