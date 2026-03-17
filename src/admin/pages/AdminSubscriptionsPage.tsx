@@ -73,27 +73,30 @@ export default function AdminSubscriptionsPage() {
   const loadData = async () => {
     try {
       const { request } = await import('../services/admin-api');
-      const data = await request<any>('/api/admin/subscriptions/unified');
-      const subs = data.subscriptions || [];
+      const [uniData, statsData] = await Promise.all([
+        request<any>('/api/admin/subscriptions/unified'),
+        request<any>('/api/admin/subscriptions/unified-stats').catch(() => null),
+      ]);
+      const subs = uniData.subscriptions || [];
       setSubscriptions(subs);
-      const s = data.stats || {};
+      const s = statsData || {};
       setStats({
-        total: s.total || 0,
-        active: s.active || 0,
-        expired: 0,
-        cancelled: subs.filter((x: any) => x.status === 'cancelled').length,
-        byPlan: {
-          free: subs.filter((x: any) => x.planId === 'free').length,
-          pro: subs.filter((x: any) => x.planId === 'pro' && x.type === 'platform').length,
+        total: s.total ?? subs.length,
+        active: s.active ?? subs.filter((x: any) => x.status === 'active').length,
+        expired: s.expired ?? 0,
+        cancelled: s.cancelled ?? subs.filter((x: any) => x.status === 'cancelled').length,
+        byPlan: s.byPlan ?? {
+          free: subs.filter((x: any) => x.planId === 'free' && x.type === 'platform').length,
+          pro: subs.filter((x: any) => x.planId === 'pro').length,
           enterprise: subs.filter((x: any) => x.planId === 'enterprise').length,
           api_free: subs.filter((x: any) => x.planId === 'free' && x.type === 'api').length,
           api_starter: subs.filter((x: any) => x.planId === 'starter').length,
           api_professional: subs.filter((x: any) => x.planId === 'professional').length,
         },
-        monthlyRecurring: 0,
-        totalRevenue: 0,
-        platform: { total: s.platform || 0, active: 0, revenue: 0 },
-        api: { total: s.api || 0, active: 0, revenue: 0 },
+        monthlyRecurring: s.monthlyRecurring ?? 0,
+        totalRevenue: s.totalRevenue ?? 0,
+        platform: { total: s.platform?.total ?? subs.filter((x: any) => x.type === 'platform').length, active: s.platform?.active ?? 0, revenue: s.platform?.revenue ?? 0 },
+        api: { total: s.api?.total ?? subs.filter((x: any) => x.type === 'api').length, active: s.api?.active ?? 0, revenue: s.api?.revenue ?? 0 },
       });
     } catch (error) {
       console.error('Failed to load subscriptions:', error);
@@ -310,8 +313,8 @@ export default function AdminSubscriptionsPage() {
                     <div className="text-sm">
                       {sub.type === 'platform' ? (
                         <>
-                          <div>Analyses: {(sub as any).analysesUsed ?? sub.usedAnalyses ?? 0}/{(sub as any).analysesLimit ?? sub.limits?.analyses_per_month ?? 0}</div>
-                          <div>API: {(sub as any).apiRequestsUsed ?? sub.usedApiRequests ?? 0}/{(sub as any).apiRequestsLimit ?? sub.limits?.api_requests_per_month ?? 0}</div>
+                          <div>Analyses: {sub.usedAnalyses ?? 0}/{sub.limits?.analyses_per_month ?? 0}</div>
+                          <div>API: {sub.usedApiRequests ?? 0}/{sub.limits?.api_requests_per_month ?? 0}</div>
                         </>
                       ) : (
                         <div>Requests: {(sub as any).requestsUsed ?? 0}/{(sub as any).requestsLimit ?? 0}</div>
