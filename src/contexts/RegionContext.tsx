@@ -24,11 +24,9 @@ export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const setRegion = (newRegion: Region) => {
     if (newRegion === region) return;
     
-    console.log('🔄 Switching region:', region, '->', newRegion);
     setRegionState(newRegion);
     localStorage.setItem('nutrisight_region', newRegion);
     setRenderKey(prev => prev + 1);
-    console.log('✅ Region switched to:', newRegion);
     
     // Redirect based on region
     const currentPath = window.location.pathname;
@@ -40,7 +38,6 @@ export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   useEffect(() => {
-    console.log('🌍 Region changed:', region, '| isIndian:', region === 'indian');
     document.documentElement.setAttribute('data-region', region);
   }, [region]);
 
