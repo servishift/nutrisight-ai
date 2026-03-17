@@ -24,7 +24,6 @@ services:
       - FLASK_ENV=production
       - REDIS_URL=redis://redis:6379/0
       - FRONTEND_URL=http://localhost
-      - DATABASE_URL=${DATABASE_URL}
     volumes:
       - ./backend/logs:/app/logs
     networks:
