@@ -127,16 +127,18 @@ jobs:
     name: Deploy Backend
     runs-on: ubuntu-latest
     needs: docker-build-push
-    if: |
-      github.ref == 'refs/heads/main' &&
-      github.event_name == 'push' &&
-      secrets.DEPLOY_HOST != ''
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment: production
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Skip if no server configured
+        if: ${{ secrets.DEPLOY_HOST == '' }}
+        run: echo "No DEPLOY_HOST set — skipping deploy"
+
       - name: Deploy via SSH
+        if: ${{ secrets.DEPLOY_HOST != '' }}
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -166,10 +168,7 @@ jobs:
     name: Health Check
     runs-on: ubuntu-latest
     needs: deploy
-    if: |
-      github.ref == 'refs/heads/main' &&
-      github.event_name == 'push' &&
-      secrets.DEPLOY_HOST != ''
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
       - name: Check /health
@@ -189,6 +188,7 @@ jobs:
     steps:
       - name: Discord notification
         if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
+        continue-on-error: true
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           BUILD_STATUS: ${{ needs.docker-build-push.result }}
