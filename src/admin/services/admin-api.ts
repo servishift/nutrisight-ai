@@ -8,7 +8,6 @@ const BASE = import.meta.env.VITE_API_BASE_URL || '';
 function authHeaders(): HeadersInit {
   const tokens = localStorage.getItem('foodintel_auth_tokens');
   const parsed = tokens ? JSON.parse(tokens) : null;
-  console.log('Auth tokens:', parsed);
   return {
     'Content-Type': 'application/json',
     ...(parsed?.accessToken ? { Authorization: `Bearer ${parsed.accessToken}` } : {}),
@@ -17,13 +16,9 @@ function authHeaders(): HeadersInit {
 
 export async function request<T>(path: string, opts?: RequestInit): Promise<T> {
   const headers = authHeaders();
-  console.log('Making request to:', `${BASE}${path}`);
-  console.log('Headers:', headers);
-  
   const res = await fetch(`${BASE}${path}`, { headers, ...opts });
   
   if (!res.ok) {
-    console.error('Request failed:', res.status, res.statusText);
     const body = await res.json().catch(() => ({ message: res.statusText }));
     throw new Error(body.message || `API ${res.status}`);
   }
