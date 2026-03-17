@@ -346,28 +346,7 @@ def get_api_usage(current_user):
                 'planName': sub_data.get('planName')
             }), 200
 
-        # Fallback to platform subscription if no dedicated API subscription exists
-        platform_subs = db.collection('subscriptions')\
-            .where('userId', '==', user_id)\
-            .where('status', '==', 'active')\
-            .limit(1)\
-            .stream()
-        platform_sub = next(platform_subs, None)
-        if platform_sub:
-            platform_data = platform_sub.to_dict()
-            platforms_limits = platform_data.get('limits', {})
-            api_limit = platforms_limits.get('api_requests_per_month', 0)
-            api_used = platform_data.get('usedApiRequests', platform_data.get('apiRequestsUsed', 0))
-            plan_name = platform_data.get('planName') or platform_data.get('planId') or 'Platform'
-
-            return jsonify({
-                'totalRequests': total_requests,
-                'requestsUsed': api_used,
-                'requestsLimit': api_limit,
-                'requestsRemaining': api_limit - api_used if api_limit != -1 else -1,
-                'planName': plan_name
-            }), 200
-
+        # No dedicated API subscription — return None so UI shows correct state
         return jsonify({
             'totalRequests': total_requests,
             'requestsUsed': 0,

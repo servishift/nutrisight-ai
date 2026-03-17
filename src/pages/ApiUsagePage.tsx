@@ -13,12 +13,15 @@ interface UsageStats {
 }
 
 interface PlatformSubscription {
+  planId: string;
   planName: string;
-  analysesUsed: number;
-  analysesLimit: number;
-  apiRequestsUsed: number;
-  apiRequestsLimit: number;
   status: string;
+  usedAnalyses: number;
+  usedApiRequests: number;
+  limits: {
+    analyses_per_month: number;
+    api_requests_per_month: number;
+  };
 }
 
 
@@ -99,9 +102,9 @@ const ApiUsagePage = () => {
     ? (apiUsage.requestsUsed / apiUsage.requestsLimit) * 100
     : 0;
 
-  const platformUsagePercent = platformSub && platformSub.analysesLimit > 0
-    ? (platformSub.analysesUsed / platformSub.analysesLimit) * 100
-    : 0;
+  const analysesLimit = platformSub?.limits?.analyses_per_month ?? 0;
+  const analysesUsed = platformSub?.usedAnalyses ?? 0;
+  const platformUsagePercent = analysesLimit > 0 ? (analysesUsed / analysesLimit) * 100 : 0;
 
   return (
     <PageLayout>
@@ -124,7 +127,7 @@ const ApiUsagePage = () => {
                   <span className="text-gray-600 text-sm">Current Plan</span>
                   <Activity className="w-5 h-5 text-blue-600" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{platformSub.planName}</p>
+                <p className="text-2xl font-bold text-gray-900">{platformSub.planName || platformSub.planId}</p>
                 <p className="text-sm text-gray-500 mt-1">{platformSub.status}</p>
               </div>
 
@@ -134,9 +137,9 @@ const ApiUsagePage = () => {
                   <TrendingUp className="w-5 h-5 text-green-600" />
                 </div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {(platformSub.analysesUsed || 0).toLocaleString()}
+                  {analysesUsed.toLocaleString()}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">of {(platformSub.analysesLimit || 0).toLocaleString()}</p>
+                <p className="text-sm text-gray-500 mt-1">of {analysesLimit.toLocaleString()}</p>
               </div>
 
               <div className="bg-white rounded-lg shadow p-6">
@@ -145,19 +148,19 @@ const ApiUsagePage = () => {
                   <Zap className="w-5 h-5 text-purple-600" />
                 </div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {(platformSub.apiRequestsUsed || 0).toLocaleString()}
+                  {(platformSub.usedApiRequests || 0).toLocaleString()}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">of {(platformSub.apiRequestsLimit || 0).toLocaleString()}</p>
+                <p className="text-sm text-gray-500 mt-1">of {(platformSub.limits?.api_requests_per_month || 0).toLocaleString()}</p>
               </div>
             </div>
 
-            {platformSub.analysesLimit > 0 && (
+            {analysesLimit > 0 && (
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Usage</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm text-gray-600">
-                    <span>{(platformSub.analysesUsed || 0).toLocaleString()} used</span>
-                    <span>{(platformSub.analysesLimit || 0).toLocaleString()} total</span>
+                    <span>{analysesUsed.toLocaleString()} used</span>
+                    <span>{analysesLimit.toLocaleString()} total</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
                     <div
@@ -176,7 +179,7 @@ const ApiUsagePage = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-gray-600">
-                      {((platformSub.analysesLimit || 0) - (platformSub.analysesUsed || 0)).toLocaleString()} analyses remaining
+                      {(analysesLimit - analysesUsed).toLocaleString()} analyses remaining
                     </p>
                     {platformUsagePercent < 80 ? (
                       <span className="flex items-center text-green-600 text-sm">
