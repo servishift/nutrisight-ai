@@ -41,7 +41,7 @@ export function CheckoutButton({ planId, planName, price, disabled }: CheckoutBu
       // Activate free plan directly
       try {
         setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/payment/subscribe`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/payment/subscribe`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -72,7 +72,7 @@ export function CheckoutButton({ planId, planName, price, disabled }: CheckoutBu
       setLoading(true);
 
       // Create order
-      const orderResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/payment/subscribe`, {
+      const orderResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/payment/subscribe`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -113,7 +113,7 @@ export function CheckoutButton({ planId, planName, price, disabled }: CheckoutBu
           handler: async function (response: any) {
             // Verify payment
             try {
-              const verifyResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/payment/verify`, {
+              const verifyResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/payment/verify`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${accessToken}`,

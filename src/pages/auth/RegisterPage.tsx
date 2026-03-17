@@ -24,13 +24,13 @@ export default function RegisterPage() {
 
   const checkRegistrationStatus = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/admin/settings/public`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/admin/settings/public`);
       if (response.ok) {
         const data = await response.json();
         setRegistrationClosed(!data.registrationOpen);
       }
-    } catch (error) {
-      console.log('Could not check registration status');
+    } catch {
+      // silently ignore
     }
   };
 
