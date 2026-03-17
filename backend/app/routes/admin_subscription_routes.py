@@ -467,6 +467,21 @@ def get_unified_stats(current_user):
         return jsonify(stats), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+@admin_subscription_bp.route('/<sub_type>/<subscription_id>', methods=['DELETE'])
+@require_admin
+def delete_subscription(current_user, sub_type, subscription_id):
+    """Hard delete a subscription document"""
+    try:
+        db = firestore.client()
+        collection = 'api_subscriptions' if sub_type == 'api' else 'subscriptions'
+        ref = db.collection(collection).document(subscription_id)
+        if not ref.get().exists:
+            return jsonify({'message': 'Subscription not found'}), 404
+        ref.delete()
+        return jsonify({'message': 'Subscription deleted'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 400
+
 @admin_subscription_bp.route('/reset-usage/<subscription_id>', methods=['POST'])
 @require_admin
 def reset_usage(current_user, subscription_id):

@@ -73,7 +73,7 @@ export default function AdminSubscriptionsPage() {
   const loadData = async () => {
     try {
       const { request } = await import('../services/admin-api');
-      const data = await request<any>('/api/admin/subscriptions/all');
+      const data = await request<any>('/api/admin/subscriptions/unified');
       const subs = data.subscriptions || [];
       setSubscriptions(subs);
       const s = data.stats || {};
@@ -103,13 +103,25 @@ export default function AdminSubscriptionsPage() {
   };
 
   const handleCancelSubscription = async (id: string, type: 'platform' | 'api') => {
-    if (!confirm('Are you sure you want to cancel this subscription?')) return;
+    if (!confirm('Cancel this subscription?')) return;
     try {
       const { request } = await import('../services/admin-api');
-      await request(`/api/admin/subscriptions/${type}/${id}/cancel`, { method: 'POST' });
+      const collection = type === 'platform' ? 'platform' : 'api';
+      await request(`/api/admin/subscriptions/${collection}/${id}/cancel`, { method: 'POST' });
       loadData();
     } catch (error) {
-      console.error('Failed to cancel subscription:', error);
+      console.error('Failed to cancel:', error);
+    }
+  };
+
+  const handleDeleteSubscription = async (id: string, type: 'platform' | 'api') => {
+    if (!confirm('Permanently DELETE this subscription? This cannot be undone.')) return;
+    try {
+      const { request } = await import('../services/admin-api');
+      await request(`/api/admin/subscriptions/${type}/${id}`, { method: 'DELETE' });
+      loadData();
+    } catch (error) {
+      console.error('Failed to delete:', error);
     }
   };
 
@@ -312,15 +324,24 @@ export default function AdminSubscriptionsPage() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    {sub.status === 'active' && sub.planId !== 'free' && (
+                    <div className="flex gap-2">
+                      {sub.status === 'active' && sub.planId !== 'free' && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleCancelSubscription(sub.id, sub.type)}
+                        >
+                          Cancel
+                        </Button>
+                      )}
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => handleCancelSubscription(sub.id, sub.type)}
+                        onClick={() => handleDeleteSubscription(sub.id, sub.type)}
                       >
-                        Cancel
+                        Delete
                       </Button>
-                    )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
