@@ -498,10 +498,13 @@ def get_audit_logs(page=1, per_page=20):
                 # Handle Firestore timestamp
                 timestamp = data['createdAt']
                 if hasattr(timestamp, 'isoformat'):
-                    data['createdAt'] = timestamp.isoformat() + 'Z'
+                    iso = timestamp.isoformat()
+                    # Remove timezone offset then add Z, or just use as-is if already UTC
+                    if iso.endswith('+00:00'):
+                        iso = iso[:-6] + 'Z'
+                    data['createdAt'] = iso
                 elif hasattr(timestamp, 'timestamp'):
-                    # Firestore timestamp object
-                    data['createdAt'] = datetime.fromtimestamp(timestamp.timestamp()).isoformat() + 'Z'
+                    data['createdAt'] = datetime.utcfromtimestamp(timestamp.timestamp()).isoformat() + 'Z'
                 else:
                     data['createdAt'] = str(timestamp)
             logs.append(data)

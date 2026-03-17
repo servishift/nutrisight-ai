@@ -54,7 +54,7 @@ export interface AnalyticsData {
 export interface AuditLog {
   id: string;
   action: string;
-  targetType: 'user' | 'additive' | 'setting';
+  targetType: string;
   targetId: string;
   adminId: string;
   adminEmail: string;
