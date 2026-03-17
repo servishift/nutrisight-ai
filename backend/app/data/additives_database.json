@@ -1,0 +1,536 @@
+[
+  {
+    "name": "Citric Acid",
+    "type": "Antioxidant",
+    "risk": "low",
+    "frequency": 2858
+  },
+  {
+    "name": "Yeast",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 2161
+  },
+  {
+    "name": "Corn Syrup",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 2053
+  },
+  {
+    "name": "Lecithin",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 1792
+  },
+  {
+    "name": "Xanthan Gum",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 1164
+  },
+  {
+    "name": "Potassium Sorbate",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 933
+  },
+  {
+    "name": "Yeast Extract",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "frequency": 893
+  },
+  {
+    "name": "Ascorbic Acid",
+    "type": "Antioxidant",
+    "risk": "low",
+    "frequency": 888
+  },
+  {
+    "name": "Guar Gum",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 876
+  },
+  {
+    "name": "Sodium Bicarbonate",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 669
+  },
+  {
+    "name": "High Fructose Corn Syrup",
+    "type": "Sweetener",
+    "risk": "high",
+    "frequency": 659
+  },
+  {
+    "name": "Caramel Color",
+    "type": "Color",
+    "risk": "medium",
+    "frequency": 657
+  },
+  {
+    "name": "Baking Soda",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 653
+  },
+  {
+    "name": "Red 40",
+    "type": "Color",
+    "risk": "high",
+    "frequency": 626
+  },
+  {
+    "name": "Sodium Benzoate",
+    "type": "Preservative",
+    "risk": "medium",
+    "frequency": 622
+  },
+  {
+    "name": "Turmeric",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 608
+  },
+  {
+    "name": "Yellow 5",
+    "type": "Color",
+    "risk": "high",
+    "frequency": 593
+  },
+  {
+    "name": "Monocalcium Phosphate",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 566
+  },
+  {
+    "name": "Annatto",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 533
+  },
+  {
+    "name": "Blue 1",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 525
+  },
+  {
+    "name": "Sodium Acid Pyrophosphate",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 493
+  },
+  {
+    "name": "Yellow 6",
+    "type": "Color",
+    "risk": "high",
+    "frequency": 490
+  },
+  {
+    "name": "Calcium Propionate",
+    "type": "Preservative",
+    "risk": "medium",
+    "frequency": 474
+  },
+  {
+    "name": "Hydrolyzed",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "frequency": 437
+  },
+  {
+    "name": "Modified Corn Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 420
+  },
+  {
+    "name": "Fd&C",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 367
+  },
+  {
+    "name": "Pectin",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 366
+  },
+  {
+    "name": "Carrageenan",
+    "type": "Emulsifier",
+    "risk": "medium",
+    "frequency": 364
+  },
+  {
+    "name": "Cellulose Gum",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 352
+  },
+  {
+    "name": "Sodium Nitrite",
+    "type": "Preservative",
+    "risk": "high",
+    "frequency": 345
+  },
+  {
+    "name": "Modified Food Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 326
+  },
+  {
+    "name": "Polysorbate",
+    "type": "Emulsifier",
+    "risk": "medium",
+    "frequency": 321
+  },
+  {
+    "name": "Sorbic Acid",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 302
+  },
+  {
+    "name": "Monosodium Glutamate",
+    "type": "Flavor Enhancer",
+    "risk": "medium",
+    "frequency": 299
+  },
+  {
+    "name": "Blue 2",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 266
+  },
+  {
+    "name": "Beta Carotene",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 257
+  },
+  {
+    "name": "Disodium Inosinate",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "frequency": 254
+  },
+  {
+    "name": "Tocopherol",
+    "type": "Antioxidant",
+    "risk": "low",
+    "frequency": 252
+  },
+  {
+    "name": "Sodium Erythorbate",
+    "type": "Antioxidant",
+    "risk": "low",
+    "frequency": 251
+  },
+  {
+    "name": "Titanium Dioxide",
+    "type": "Color",
+    "risk": "high",
+    "frequency": 247
+  },
+  {
+    "name": "Baking Powder",
+    "type": "Leavening",
+    "risk": "low",
+    "frequency": 222
+  },
+  {
+    "name": "Sodium Stearoyl Lactylate",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 221
+  },
+  {
+    "name": "Disodium Guanylate",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "frequency": 218
+  },
+  {
+    "name": "Gelatin",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 185
+  },
+  {
+    "name": "Datem",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 162
+  },
+  {
+    "name": "Sodium Propionate",
+    "type": "Preservative",
+    "risk": "medium",
+    "frequency": 134
+  },
+  {
+    "name": "Sucralose",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 133
+  },
+  {
+    "name": "Red 3",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 130
+  },
+  {
+    "name": "Modified Cornstarch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 122
+  },
+  {
+    "name": "Tbhq",
+    "type": "Antioxidant",
+    "risk": "high",
+    "frequency": 118
+  },
+  {
+    "name": "Sorbitol",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 117
+  },
+  {
+    "name": "Bht",
+    "type": "Antioxidant",
+    "risk": "high",
+    "frequency": 109
+  },
+  {
+    "name": "Agar",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 107
+  },
+  {
+    "name": "Stevia",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 85
+  },
+  {
+    "name": "Mono And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 84
+  },
+  {
+    "name": "Paprika Extract",
+    "type": "Color",
+    "risk": "low",
+    "frequency": 81
+  },
+  {
+    "name": "Natamycin",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 79
+  },
+  {
+    "name": "Nisin",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 78
+  },
+  {
+    "name": "Mono- And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 75
+  },
+  {
+    "name": "Acesulfame",
+    "type": "Sweetener",
+    "risk": "medium",
+    "frequency": 70
+  },
+  {
+    "name": "Maltitol",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 61
+  },
+  {
+    "name": "Potassium Benzoate",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 61
+  },
+  {
+    "name": "Bha",
+    "type": "Antioxidant",
+    "risk": "high",
+    "frequency": 52
+  },
+  {
+    "name": "Mono & Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 46
+  },
+  {
+    "name": "Erythritol",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 42
+  },
+  {
+    "name": "Aspartame",
+    "type": "Sweetener",
+    "risk": "high",
+    "frequency": 38
+  },
+  {
+    "name": "Modified Tapioca Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 36
+  },
+  {
+    "name": "Monk Fruit",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 34
+  },
+  {
+    "name": "Modified Potato Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 33
+  },
+  {
+    "name": "Carboxymethyl",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 31
+  },
+  {
+    "name": "Calcium Stearoyl",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 27
+  },
+  {
+    "name": "Modified Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 27
+  },
+  {
+    "name": "Propionic Acid",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 25
+  },
+  {
+    "name": "Sodium Nitrate",
+    "type": "Preservative",
+    "risk": "high",
+    "frequency": 15
+  },
+  {
+    "name": "Modified Wheat Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 13
+  },
+  {
+    "name": "Benzoic Acid",
+    "type": "Preservative",
+    "risk": "low",
+    "frequency": 11
+  },
+  {
+    "name": "Modified Corn Starch, Wheat Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 9
+  },
+  {
+    "name": "Mononitrate, Riboflavin, Folic Acid), Margarine (Palm Oil, Water, Soybean Oil, Salt, Contains 2% Or Less Of: Mono- And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 9
+  },
+  {
+    "name": "Mono-And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 8
+  },
+  {
+    "name": "Mono- & Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 7
+  },
+  {
+    "name": "Msg",
+    "type": "Flavor Enhancer",
+    "risk": "medium",
+    "frequency": 7
+  },
+  {
+    "name": "Monocalcium Phosphate), Mono- And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 7
+  },
+  {
+    "name": "Mononitrate, Riboflavin, Folic Acid), Water, Shortening (Soybean Oil And Hydrogenated Soybean Oil), Contains 2% Or Less Of Leavening (Sodium Bicarbonate, Sodium Aluminum Sulfate, Sodium Aluminum Phosphate), Dough Conditioners (Mono- And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 7
+  },
+  {
+    "name": "Mononitrate, Riboflavin, Folic Acid), Potato Flakes (Potatoes, Mono And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 6
+  },
+  {
+    "name": "Xylitol",
+    "type": "Sweetener",
+    "risk": "low",
+    "frequency": 6
+  },
+  {
+    "name": "Modified Corn Starch, Corn Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 5
+  },
+  {
+    "name": "Modified Corn Starch, Tapioca Starch",
+    "type": "Stabilizer",
+    "risk": "low",
+    "frequency": 5
+  },
+  {
+    "name": "Monoglycerides And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 5
+  },
+  {
+    "name": "Mononitrate, Riboflavin, Enzyme, Folic Acid) Water, Vegetable Shortening (Soybean Oil And Hydrogenated Soybean Oil) Contains 2% Or Less Of The Following: Sugar, Salt, Mono And Diglyceride",
+    "type": "Emulsifier",
+    "risk": "low",
+    "frequency": 5
+  }
+]

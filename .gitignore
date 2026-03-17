@@ -1,0 +1,111 @@
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Build outputs ─────────────────────────────────────────────
+dist/
+dist-ssr/
+*.local
+build/
+
+# ── Environment / Secrets ─────────────────────────────────────
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# ── Firebase service account keys ─────────────────────────────
+backend/*firebase-adminsdk*.json
+*firebase-adminsdk*.json
+
+# ── ML model binaries (baked into Docker image) ───────────────
+*.pkl
+*.h5
+*.pt
+*.pth
+*.onnx
+
+# ── Large datasets (keep local, data is in Neon DB) ───────────
+backend/dataset/FoodData_Central_csv_2025-12-18/
+backend/dataset/Food_Ingredient_Intelligence_Database.csv
+backend/data/processed/
+backend/ml/dataset/
+backend/dataset/processed/
+backend/indian_data/*.csv
+backend/indian_data/*.xlsx
+backend/diet_recommendation_dataset/*.csv
+backend/models/*.csv
+backend/models/*.json
+!backend/models/diet_engine_meta.json
+!backend/models/phase3_metadata.json
+
+# ── Logs ──────────────────────────────────────────────────────
+logs/
+*.log
+backend/logs/
+backend/server.log
+
+# ── Python cache ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+.eggs/
+
+# ── Test & one-off scripts (keep local) ───────────────────────
+backend/test_*.py
+backend/check_*.py
+backend/verify_*.py
+backend/fix_*.py
+backend/add_test_*.py
+backend/create_test_*.py
+backend/delete_*.py
+backend/show_*.py
+backend/grant_*.py
+backend/update_*.py
+backend/sync_*.py
+backend/retrain_*.py
+backend/generate_*.py
+backend/apply_*.py
+backend/final_fix_*.py
+backend/batch_test_*.csv
+
+# ── One-off setup/admin scripts ───────────────────────────────
+backend/setup_*.py
+backend/populate_*.py
+backend/build_production_db.py
+backend/extract_additives.py
+backend/nutrition_predictor.py
+backend/data_preprocessing*.py
+backend/run_ml_pipeline.py
+backend/scrape_*.py
+
+# ── Clutter docs (keep local) ─────────────────────────────────
+backend/*.md
+!backend/README.md
+diagrams/
+docs/
+*.md
+!README.md
+!CICD_SETUP.md
+
+# ── Misc ──────────────────────────────────────────────────────
+bun.lockb
+sync-upstream.bat
+start.bat
+start.sh
+deploy.sh
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

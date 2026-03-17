@@ -1,0 +1,38 @@
+# ============================================================
+# Frontend .dockerignore
+# ============================================================
+
+# Dependencies (installed fresh in container)
+node_modules/
+npm-debug.log*
+
+# Previous build output
+dist/
+build/
+
+# Environment files (VITE_API_BASE_URL is set at build time in Dockerfile)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Backend (not needed for frontend build)
+backend/
+
+# Tests
+src/test/
+coverage/
+*.test.ts
+*.spec.ts
+
+# Docs and misc
+*.md
+docs/
+diagrams/
+.git
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+bun.lockb

@@ -1,0 +1,426 @@
+[
+  {
+    "name": "Sodium Benzoate",
+    "code": "E211",
+    "type": "Preservative",
+    "risk": "medium",
+    "description": "Common preservative linked to hyperactivity when combined with artificial colors.",
+    "frequency": 622
+  },
+  {
+    "name": "Potassium Sorbate",
+    "code": "E202",
+    "type": "Preservative",
+    "risk": "low",
+    "description": "Widely used preservative, generally recognized as safe.",
+    "frequency": 933
+  },
+  {
+    "name": "Sodium Nitrite",
+    "code": "E250",
+    "type": "Preservative",
+    "risk": "high",
+    "description": "Used in processed meats, linked to carcinogenic nitrosamines.",
+    "frequency": 345
+  },
+  {
+    "name": "BHA",
+    "code": "E320",
+    "type": "Antioxidant",
+    "risk": "high",
+    "description": "Butylated hydroxyanisole \u2014 potential endocrine disruptor.",
+    "frequency": 52
+  },
+  {
+    "name": "BHT",
+    "code": "E321",
+    "type": "Antioxidant",
+    "risk": "high",
+    "description": "Butylated hydroxytoluene \u2014 synthetic antioxidant.",
+    "frequency": 109
+  },
+  {
+    "name": "Yellow 5",
+    "code": "E102",
+    "type": "Color",
+    "risk": "high",
+    "description": "Yellow azo dye linked to hyperactivity in children.",
+    "frequency": 593
+  },
+  {
+    "name": "Red 40",
+    "code": "E129",
+    "type": "Color",
+    "risk": "high",
+    "description": "Most widely used food dye, linked to behavioral issues.",
+    "frequency": 626
+  },
+  {
+    "name": "Yellow 6",
+    "code": "E110",
+    "type": "Color",
+    "risk": "high",
+    "description": "Synthetic azo dye, banned in some countries.",
+    "frequency": 490
+  },
+  {
+    "name": "Blue 1",
+    "code": "E133",
+    "type": "Color",
+    "risk": "low",
+    "description": "Petroleum-derived synthetic dye.",
+    "frequency": 525
+  },
+  {
+    "name": "Caramel Color",
+    "code": "E150",
+    "type": "Color",
+    "risk": "medium",
+    "description": "Some types contain 4-MEI, a potential carcinogen.",
+    "frequency": 657
+  },
+  {
+    "name": "Monosodium Glutamate",
+    "code": "E621",
+    "type": "Flavor Enhancer",
+    "risk": "medium",
+    "description": "Can cause sensitivity reactions in some individuals.",
+    "frequency": 299
+  },
+  {
+    "name": "Aspartame",
+    "code": "E951",
+    "type": "Sweetener",
+    "risk": "high",
+    "description": "IARC classified as possibly carcinogenic to humans.",
+    "frequency": 38
+  },
+  {
+    "name": "Sucralose",
+    "code": "E955",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Non-caloric sweetener, 600x sweeter than sugar.",
+    "frequency": 133
+  },
+  {
+    "name": "Acesulfame K",
+    "code": "E950",
+    "type": "Sweetener",
+    "risk": "medium",
+    "description": "Limited long-term studies available.",
+    "frequency": 70
+  },
+  {
+    "name": "High Fructose Corn Syrup",
+    "code": "",
+    "type": "Sweetener",
+    "risk": "high",
+    "description": "Linked to obesity, diabetes, and metabolic syndrome.",
+    "frequency": 659
+  },
+  {
+    "name": "Carrageenan",
+    "code": "E407",
+    "type": "Emulsifier",
+    "risk": "medium",
+    "description": "Seaweed-derived, linked to gut inflammation.",
+    "frequency": 364
+  },
+  {
+    "name": "Polysorbate 80",
+    "code": "E433",
+    "type": "Emulsifier",
+    "risk": "medium",
+    "description": "Synthetic emulsifier, may affect gut microbiome.",
+    "frequency": 321
+  },
+  {
+    "name": "Soy Lecithin",
+    "code": "E322",
+    "type": "Emulsifier",
+    "risk": "low",
+    "description": "Natural emulsifier derived from soybeans.",
+    "frequency": 1792
+  },
+  {
+    "name": "Xanthan Gum",
+    "code": "E415",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Fermented polysaccharide used as thickener.",
+    "frequency": 1164
+  },
+  {
+    "name": "Guar Gum",
+    "code": "E412",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Natural fiber from guar beans.",
+    "frequency": 876
+  },
+  {
+    "name": "TBHQ",
+    "code": "E319",
+    "type": "Antioxidant",
+    "risk": "high",
+    "description": "Synthetic preservative, may cause DNA damage.",
+    "frequency": 118
+  },
+  {
+    "name": "Sulfites",
+    "code": "E220-228",
+    "type": "Preservative",
+    "risk": "medium",
+    "description": "Can trigger asthma attacks in sensitive individuals.",
+    "frequency": 0
+  },
+  {
+    "name": "Citric Acid",
+    "code": "E330",
+    "type": "Antioxidant",
+    "risk": "low",
+    "description": "Natural acid found in citrus fruits, used as preservative.",
+    "frequency": 2858
+  },
+  {
+    "name": "Ascorbic Acid",
+    "code": "E300",
+    "type": "Antioxidant",
+    "risk": "low",
+    "description": "Vitamin C, natural antioxidant and preservative.",
+    "frequency": 888
+  },
+  {
+    "name": "Calcium Propionate",
+    "code": "E282",
+    "type": "Preservative",
+    "risk": "medium",
+    "description": "Mold inhibitor commonly used in bread.",
+    "frequency": 474
+  },
+  {
+    "name": "Sodium Nitrate",
+    "code": "E251",
+    "type": "Preservative",
+    "risk": "high",
+    "description": "Converts to nitrite, linked to cancer risk.",
+    "frequency": 15
+  },
+  {
+    "name": "Titanium Dioxide",
+    "code": "E171",
+    "type": "Color",
+    "risk": "high",
+    "description": "White pigment, banned in EU due to health concerns.",
+    "frequency": 247
+  },
+  {
+    "name": "Blue 2",
+    "code": "E132",
+    "type": "Color",
+    "risk": "low",
+    "description": "Synthetic dye used in beverages and candies.",
+    "frequency": 266
+  },
+  {
+    "name": "Red 3",
+    "code": "E127",
+    "type": "Color",
+    "risk": "medium",
+    "description": "Cherry-red dye, restricted in some countries.",
+    "frequency": 130
+  },
+  {
+    "name": "Annatto",
+    "code": "E160b",
+    "type": "Color",
+    "risk": "low",
+    "description": "Natural orange-red color from achiote seeds.",
+    "frequency": 533
+  },
+  {
+    "name": "Beta Carotene",
+    "code": "E160a",
+    "type": "Color",
+    "risk": "low",
+    "description": "Natural orange pigment, vitamin A precursor.",
+    "frequency": 257
+  },
+  {
+    "name": "Turmeric",
+    "code": "E100",
+    "type": "Color",
+    "risk": "low",
+    "description": "Natural yellow spice with anti-inflammatory properties.",
+    "frequency": 608
+  },
+  {
+    "name": "Sodium Stearoyl Lactylate",
+    "code": "E481",
+    "type": "Emulsifier",
+    "risk": "low",
+    "description": "Dough conditioner and emulsifier.",
+    "frequency": 221
+  },
+  {
+    "name": "DATEM",
+    "code": "E472e",
+    "type": "Emulsifier",
+    "risk": "low",
+    "description": "Diacetyl tartaric acid ester, dough strengthener.",
+    "frequency": 162
+  },
+  {
+    "name": "Gelatin",
+    "code": "",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Protein derived from collagen, used as gelling agent.",
+    "frequency": 185
+  },
+  {
+    "name": "Pectin",
+    "code": "E440",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Natural fiber from fruits, used as thickener.",
+    "frequency": 366
+  },
+  {
+    "name": "Agar",
+    "code": "E406",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Seaweed-derived gelling agent.",
+    "frequency": 107
+  },
+  {
+    "name": "Cellulose Gum",
+    "code": "E466",
+    "type": "Stabilizer",
+    "risk": "low",
+    "description": "Carboxymethyl cellulose, plant-based thickener.",
+    "frequency": 352
+  },
+  {
+    "name": "Yeast Extract",
+    "code": "",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "description": "Natural flavor enhancer rich in glutamates.",
+    "frequency": 893
+  },
+  {
+    "name": "Disodium Inosinate",
+    "code": "E631",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "description": "Flavor enhancer often used with MSG.",
+    "frequency": 254
+  },
+  {
+    "name": "Disodium Guanylate",
+    "code": "E627",
+    "type": "Flavor Enhancer",
+    "risk": "low",
+    "description": "Flavor enhancer that amplifies umami taste.",
+    "frequency": 218
+  },
+  {
+    "name": "Corn Syrup",
+    "code": "",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Glucose syrup derived from corn starch.",
+    "frequency": 2053
+  },
+  {
+    "name": "Stevia",
+    "code": "E960",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Natural zero-calorie sweetener from stevia plant.",
+    "frequency": 85
+  },
+  {
+    "name": "Erythritol",
+    "code": "E968",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Sugar alcohol with minimal calories.",
+    "frequency": 42
+  },
+  {
+    "name": "Sorbitol",
+    "code": "E420",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Sugar alcohol, may cause digestive issues in large amounts.",
+    "frequency": 117
+  },
+  {
+    "name": "Maltitol",
+    "code": "E965",
+    "type": "Sweetener",
+    "risk": "low",
+    "description": "Sugar alcohol used in sugar-free products.",
+    "frequency": 61
+  },
+  {
+    "name": "Sorbic Acid",
+    "code": "E200",
+    "type": "Preservative",
+    "risk": "low",
+    "description": "Natural antimicrobial preservative.",
+    "frequency": 302
+  },
+  {
+    "name": "Natamycin",
+    "code": "E235",
+    "type": "Preservative",
+    "risk": "low",
+    "description": "Natural antifungal used on cheese surfaces.",
+    "frequency": 79
+  },
+  {
+    "name": "Nisin",
+    "code": "E234",
+    "type": "Preservative",
+    "risk": "low",
+    "description": "Natural antimicrobial peptide from bacteria.",
+    "frequency": 78
+  },
+  {
+    "name": "Sodium Propionate",
+    "code": "E281",
+    "type": "Preservative",
+    "risk": "medium",
+    "description": "Mold inhibitor used in baked goods.",
+    "frequency": 134
+  },
+  {
+    "name": "Potassium Benzoate",
+    "code": "E212",
+    "type": "Preservative",
+    "risk": "low",
+    "description": "Preservative similar to sodium benzoate.",
+    "frequency": 61
+  },
+  {
+    "name": "Tocopherols",
+    "code": "E306-309",
+    "type": "Antioxidant",
+    "risk": "low",
+    "description": "Vitamin E, natural antioxidant.",
+    "frequency": 252
+  },
+  {
+    "name": "Sodium Erythorbate",
+    "code": "E316",
+    "type": "Antioxidant",
+    "risk": "low",
+    "description": "Antioxidant used in cured meats.",
+    "frequency": 251
+  }
+]

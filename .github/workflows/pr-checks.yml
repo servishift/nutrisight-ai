@@ -1,0 +1,58 @@
+# ============================================================
+# NutriSight AI — PR Checks
+# Runs on every pull_request targeting main.
+# Blocks merge if type-check, build, or secret scan fails.
+# ============================================================
+
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history needed for diff-based secret scan
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci --ignore-scripts
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Build check
+        run: VITE_API_BASE_URL="" npm run build
+
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Check for secrets in diff
+        run: |
+          git diff origin/main...HEAD -- '*.ts' '*.tsx' '*.py' '*.env' | \
+            grep -E "(PRIVATE_KEY|password\s*=\s*['\"][^'\"]{8,}|secret\s*=\s*['\"][^'\"]{8,}|AIza[0-9A-Za-z_-]{35})" && \
+            echo "⚠️  Possible secret detected — review before merging" && exit 1 || \
+            echo "✅ No secrets detected"
+
+      - name: Check .env files not committed
+        run: |
+          if git diff origin/main...HEAD --name-only | grep -E "^\.env$|^backend/\.env$"; then
+            echo "❌ .env file detected in PR — remove it immediately"
+            exit 1
+          fi
+          echo "✅ No .env files in PR"

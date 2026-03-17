@@ -1,0 +1,50 @@
+# ============================================================
+# NutriSight AI - Production Requirements
+# IMPORTANT: scikit-learn version MUST match the version used
+# to train the .pkl models (1.8.0) to avoid unpickling errors.
+# ============================================================
+
+# Web framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# Firebase Admin SDK
+firebase-admin==6.4.0
+
+# Auth
+PyJWT==2.8.0
+bcrypt==4.1.2
+
+# Environment variables
+python-dotenv==1.0.0
+
+# ML / Data — versions must match what trained the .pkl models
+pandas==2.1.4
+numpy==1.24.3
+scikit-learn==1.8.0
+joblib==1.3.2
+
+# Graph analysis
+networkx==3.2.1
+
+# Excel support
+openpyxl==3.1.2
+
+# HTTP requests
+requests==2.31.0
+
+# Payment gateway
+razorpay==1.4.2
+
+# Production WSGI server
+gunicorn==21.2.0
+
+# Caching
+redis==5.0.0
+
+# Neon DB / PostgreSQL
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.23
+
+# Performance
+gevent==23.9.0

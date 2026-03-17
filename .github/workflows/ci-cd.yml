@@ -1,0 +1,203 @@
+# ============================================================
+# NutriSight AI — CI/CD Pipeline
+#
+# push main:
+#   frontend → Vercel (auto-deploy via Vercel GitHub integration)
+#   backend  → Docker Hub → SSH deploy to server
+#
+# Required GitHub Secrets:
+#   DOCKERHUB_USERNAME      ashishjaiswal222
+#   DOCKERHUB_TOKEN         Docker Hub access token
+#   DEPLOY_HOST             server IP (add when ready)
+#   DEPLOY_USER             ssh user
+#   DEPLOY_SSH_KEY          private key PEM
+#   DEPLOY_PATH             /opt/nutrisight
+#   DATABASE_URL            Neon DB connection string
+#   DISCORD_WEBHOOK_URL     (optional) notifications
+# ============================================================
+
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: cicd-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BACKEND_IMAGE: ashishjaiswal222/nutrisight-backend
+
+jobs:
+
+  # ── 1. Frontend CI (Vercel handles deploy automatically) ────
+  frontend-ci:
+    name: Frontend CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci --ignore-scripts
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: VITE_API_BASE_URL="" npm run build
+
+  # ── 2. Backend CI ───────────────────────────────────────────
+  backend-ci:
+    name: Backend CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: backend/requirements.prod.txt
+
+      - run: pip install --quiet -r requirements.prod.txt
+
+      - name: Lint
+        run: |
+          pip install --quiet flake8
+          flake8 app/ --max-line-length=120 --ignore=E501,W503
+        continue-on-error: true
+
+      - name: Security scan
+        run: |
+          pip install --quiet bandit
+          bandit -r app/ -ll -q || true
+
+  # ── 3. Docker Build & Push (main only) ──────────────────────
+  docker-build-push:
+    name: Docker Build & Push
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, backend-ci]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & push backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.BACKEND_IMAGE }}:latest
+            ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILD_SHA=${{ github.sha }}
+
+      - name: Image vulnerability scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          format: table
+          exit-code: '0'
+          severity: CRITICAL,HIGH
+        continue-on-error: true
+
+  # ── 4. Deploy backend to server (main only) ─────────────────
+  deploy:
+    name: Deploy Backend
+    runs-on: ubuntu-latest
+    needs: docker-build-push
+    if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      secrets.DEPLOY_HOST != ''
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            docker pull ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+            docker tag  ${{ env.BACKEND_IMAGE }}:${{ github.sha }} ${{ env.BACKEND_IMAGE }}:latest
+
+            IMAGE_TAG=${{ github.sha }} docker compose up -d --no-build --force-recreate backend
+
+            for i in $(seq 1 12); do
+              STATUS=$(docker inspect --format='{{.State.Health.Status}}' nutrisight-backend 2>/dev/null || echo starting)
+              [ "$STATUS" = "healthy" ] && break
+              [ $i -eq 12 ] && echo "Health check failed" && exit 1
+              sleep 10
+            done
+
+            docker image prune -f
+            echo "Deploy complete $(date)"
+
+  # ── 5. Health check ─────────────────────────────────────────
+  health-check:
+    name: Health Check
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      secrets.DEPLOY_HOST != ''
+
+    steps:
+      - name: Check /health
+        run: |
+          sleep 20
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 http://${{ secrets.DEPLOY_HOST }}/health || echo 000)
+          echo "Health: $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+  # ── 6. Notify ───────────────────────────────────────────────
+  notify:
+    name: Notify
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, backend-ci, docker-build-push]
+    if: always() && github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Discord notification
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          BUILD_STATUS: ${{ needs.docker-build-push.result }}
+          SHA: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+          MSG: ${{ github.event.head_commit.message }}
+        run: |
+          COLOR=$( [ "$BUILD_STATUS" = "success" ] && echo "3066993" || echo "15158332" )
+          ICON=$( [ "$BUILD_STATUS" = "success" ] && echo "PASSED" || echo "FAILED" )
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{\"embeds\":[{\"title\":\"NutriSight AI Build $ICON\",\"color\":$COLOR,\"fields\":[{\"name\":\"Commit\",\"value\":\"\`${SHA:0:7}\`\",\"inline\":true},{\"name\":\"By\",\"value\":\"$ACTOR\",\"inline\":true},{\"name\":\"Message\",\"value\":\"$MSG\"}]}]}"
