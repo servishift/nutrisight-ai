@@ -18,6 +18,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 RULES_PATH = os.path.join(BASE_DIR, "diet_recommendation_dataset", "disease_nutrition_rules.csv")
 
+def _load_rules_df():
+    """Load disease_nutrition_rules from Neon DB, fallback to CSV."""
+    try:
+        from app.utils.db import load_table
+        df = load_table("disease_nutrition_rules")
+        if not df.empty:
+            print(f"[DietRoutes] Loaded {len(df)} rules from Neon")
+            return df
+    except Exception as e:
+        print(f"[DietRoutes] Neon rules load failed: {e}")
+    if os.path.exists(RULES_PATH):
+        return pd.read_csv(RULES_PATH)
+    return pd.DataFrame()
+
 # Load ML Artifacts
 try:
     with open(os.path.join(MODEL_DIR, "diet_scaler.pkl"), "rb") as f:
@@ -26,10 +40,8 @@ try:
         nn_model = pickle.load(f)
     with open(os.path.join(MODEL_DIR, "diet_engine_meta.json"), "r") as f:
         meta = json.load(f)
-    
-    # Load the DataFrame to act as our index map
     matrix_df = pd.read_pickle(os.path.join(MODEL_DIR, "diet_food_matrix.pkl"))
-    rules_df = pd.read_csv(RULES_PATH)
+    rules_df = _load_rules_df()
 except Exception as e:
     print(f"Warning: ML Diet Engine files missing or corrupted: {e}")
     scaler, nn_model, meta, matrix_df, rules_df = None, None, None, None, None

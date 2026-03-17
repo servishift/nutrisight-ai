@@ -18,8 +18,6 @@ export const DatabaseToggle = () => {
   const [showWarning, setShowWarning] = useState(false);
   const [pendingRegion, setPendingRegion] = useState<'us' | 'indian' | null>(null);
   
-  console.log('🔘 DatabaseToggle rendering - region:', region, 'isIndian:', isIndian);
-
   const handleRegionChange = (newRegion: 'us' | 'indian') => {
     if (newRegion === region) return;
     

@@ -31,21 +31,20 @@ export default function Analyzer() {
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [validationWarning, setValidationWarning] = useState<string | null>(null);
   
-  console.log('🎨 Analyzer rendering - region:', region, 'isIndian:', isIndian);
-
   useEffect(() => {
     checkMaintenanceMode();
   }, []);
 
   const checkMaintenanceMode = async () => {
     try {
-      const response = await fetch(`/api/admin/settings/public`);
+      const base = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${base}/api/admin/settings/public`);
       if (response.ok) {
         const data = await response.json();
         setIsReadOnly(data.maintenanceMode === 'partial');
       }
-    } catch (error) {
-      console.log('Could not check maintenance mode');
+    } catch {
+      // silently ignore
     }
   };
 
@@ -121,7 +120,8 @@ export default function Analyzer() {
     if (!ingredientText) return;
     setIsExplaining(true);
     try {
-      const response = await fetch(`/api/explain/prediction`, {
+      const base = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${base}/api/explain/prediction`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ingredientText, topN: 10 }),
