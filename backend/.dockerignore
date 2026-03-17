@@ -1,8 +1,5 @@
-# ============================================================
-# Backend .dockerignore
-# Excludes everything not needed at runtime.
-# The image only needs: app/, models/, gunicorn_config.py, requirements.prod.txt
-# ============================================================
+# ── Only these are needed at runtime ──────────────────────────
+# app/  models/*.pkl  indian_data/models/*.pkl  gunicorn_config.py  requirements.prod.txt
 
 # Python cache
 __pycache__/
@@ -11,31 +8,26 @@ __pycache__/
 *.pyd
 *.so
 *.egg-info/
-.eggs/
 
 # Virtual environments
 .venv/
 venv/
 env/
-ENV/
 
-# Logs (created fresh in container)
+# Logs
 logs/
 *.log
 server.log
 
-# ── Raw datasets (large, only needed for training, NOT for inference) ──
+# ALL datasets — data is in Neon DB now, not needed in image
 dataset/
+data/
 ml/
+diet_recommendation_dataset/
+scripts/
 
-# Allow indian_data — needed at runtime by Indian food API
-!indian_data/
-!indian_data/models/
-!indian_data/models/*.pkl
-!indian_data/models/*.json
-!indian_data/indian_foods_master.csv
-!indian_data/clustered_foods.csv
-# Exclude everything else in indian_data
+# Indian data — only models/ needed, not CSVs (loaded from Neon)
+indian_data/*.csv
 indian_data/*.xlsx
 indian_data/*.md
 indian_data/*.txt
@@ -47,74 +39,51 @@ indian_data/indian_foods_enhanced.csv
 indian_data/mealDatabase.csv
 indian_data/pred_food.csv
 indian_data/Personalized_Diet_Recommendations.csv
-data/
-scripts/
 
-# Allow diet_recommendation_dataset — needed at runtime by diet engine
-# (only the CSV rule files, not the full training data)
-!diet_recommendation_dataset/
+# Large/duplicate model files
+models/food_vectors*.pkl
+models/ingredient_vectorizer*.pkl
+models/nutrition_database*.csv
+models/model_metadata*.json
+models/diet_engine_meta.json
+models/phase3_metadata.json
 
-# ── Duplicate timestamped model files (base names are used by the app) ──
-models/food_vectors_20260228_180124.pkl
-models/ingredient_vectorizer_20260228_180124.pkl
-models/nutrition_database_20260228_180124.csv
-models/model_metadata_20260228_180124.json
-
-# ── All CSV/Excel/PDF files except runtime datasets ──
+# All CSVs and large files
+*.csv
 *.xlsx
 *.xlsm
 *.pdf
-*.csv
-# Keep the fallback nutrition DB (471K rows)
-!models/nutrition_database.csv
-# Keep the full FDC ingredient intelligence dataset (needed for frequency + graph)
-!dataset/Food_Ingredient_Intelligence_Database.csv
 
-# ── Test, training, and utility scripts (not needed at runtime) ──
+# Test, training, one-off scripts
 test_*.py
 train_*.py
 retrain_*.py
-batch_*.py
 check_*.py
 verify_*.py
 setup_*.py
 populate_*.py
 sync_*.py
-update_*.py
 fix_*.py
 generate_*.py
 create_*.py
 delete_*.py
-show_*.py
-grant_*.py
-apply_*.py
 analyze_*.py
-export_*.py
 process_*.py
-scrape_*.py
 build_*.py
-add_*.py
 run_ml_pipeline.py
-run.py
 nutrition_predictor.py
 data_preprocessing*.py
 
-# ── Firebase credentials (injected via environment variables) ──
-*.json
-!app/**/*.json
+# Firebase credentials (use env vars)
+*firebase-adminsdk*.json
 
-# ── Documentation ──
+# Docs / IDE / Git
 *.md
-docs/
-
-# ── IDE / OS ──
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# ── Git ──
+!README.md
 .git
 .gitignore
 .env
 .env.example
+.vscode/
+.idea/
+.DS_Store

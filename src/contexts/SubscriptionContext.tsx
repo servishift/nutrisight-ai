@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useAuth } from './AuthContext';
+import { API_BASE } from '@/services/api-base';
 
 interface SubscriptionLimits {
   analyses_per_month: number;
@@ -51,7 +52,7 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
       }
       
       const { accessToken } = JSON.parse(tokens);
-      const response = await fetch(`/api/payment/subscription`, {
+      const response = await fetch(`${API_BASE}/api/payment/subscription`, {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
       
